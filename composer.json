@@ -2,7 +2,7 @@
     "name": "wbx/communes-de-france-bundle",
     "type": "symfony-bundle",
     "description": "Communes De France",
-    "keywords": ["commune", "département", "région", "france"],
+    "keywords": ["commune", "departement", "region", "france"],
     "homepage": "https://github.com/ma2thieu/wbxCommunesDeFranceBundle",
     "license": "MIT",
     "authors": [
