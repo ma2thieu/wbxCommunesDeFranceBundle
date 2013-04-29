@@ -27,13 +27,13 @@ class Departement {
     private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Region", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", cascade={"all"})
      * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
      */
     private $region;
 
     /**
-     * @ORM\OneToMany(targetEntity="Commune", mappedBy="departement", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune", mappedBy="departement", cascade={"all"})
      */
     protected $communes;
 

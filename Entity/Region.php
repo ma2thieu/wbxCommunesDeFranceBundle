@@ -27,7 +27,7 @@ class Region {
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="Departement", mappedBy="region", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement", mappedBy="region", cascade={"all"})
      */
     protected $departements;
 
