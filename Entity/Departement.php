@@ -78,20 +78,20 @@ class Departement {
     }
 
 
-    public function addCommmune(Commmune $commmune) {
+    public function addCommune(Commune $commmune) {
         $commmune->setDepartement($this);
         $this->commmunes->add($commmune);
     }
 
-    public function removeCommmune(Commmune $commmune) {
+    public function removeCommune(Commune $commmune) {
         $this->commmunes->removeElement($commmune);
     }
 
-    public function getCommmunes() {
+    public function getCommunes() {
         return $this->commmunes;
     }
 
-    public function setCommmunes(Collection $commmunes) {
+    public function setCommunes(Collection $commmunes) {
         foreach ($commmunes as $commmune) {
             $commmune->setDepartement($this);
         }
