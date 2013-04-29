@@ -16,41 +16,41 @@ class Commune {
      * @ORM\Id
      * @ORM\Column(type="string", length=3)
      */
-    private $code;
+    protected $code;
 
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Departement", cascade={"all"})
      * @ORM\JoinColumn(name="departement_code", referencedColumnName="code")
      */
-    private $departement;
+    protected $departement;
 
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Region", cascade={"all"})
      * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
      */
-    private $region;
+    protected $region;
 
     /**
      * @ORM\Column(type="string", length=15)
      */
-    private $art_nom_maj;
+    protected $art_nom_maj;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom_maj;
+    protected $nom_maj;
 
     /**
      * @ORM\Column(type="string", length=15)
      */
-    private $art_nom_min;
+    protected $art_nom_min;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $nom_min;
+    protected $nom_min;
 
 
 
