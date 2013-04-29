@@ -9,8 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table()
- * @ORM\Entity()
+ * @Orm\MappedSuperclass
  * @UniqueEntity(fields = {"code"}, message = "duplicate departement")
  */
 class Departement {
@@ -19,18 +18,18 @@ class Departement {
      * @ORM\Column(name="code", type="string", length=3, unique=true)
      * @ORM\Id
      */
-    private $code;
+    protected $code;
 
     /**
      * @ORM\Column(name="nom", type="string", length=255)
      */
-    private $nom;
+    protected $nom;
 
     /**
      * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", cascade={"all"})
      * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
      */
-    private $region;
+    protected $region;
 
     /**
      * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune", mappedBy="departement", cascade={"all"})
