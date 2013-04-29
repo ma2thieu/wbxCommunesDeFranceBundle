@@ -7,8 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Table()
- * @ORM\Entity()
+ * @Orm\MappedSuperclass
  * @UniqueEntity(fields = {"code", "departement", "region"}, message = "duplicate commune")
  */
 class Commune {
