@@ -14,19 +14,18 @@ class Commune {
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="string", length=3)
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $code;
+    private $id;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement", cascade={"all"})
      * @ORM\JoinColumn(name="departement_code", referencedColumnName="code")
      */
     protected $departement;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", cascade={"all"})
      * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
      */
@@ -65,6 +64,11 @@ class Commune {
 
     public function __toString() {
         return $this->getNomMin();
+    }
+
+
+    public function getId() {
+        return $this->id;
     }
 
 
