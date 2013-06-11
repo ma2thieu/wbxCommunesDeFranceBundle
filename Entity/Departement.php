@@ -27,7 +27,7 @@ class Departement {
     private $nom;
 
     /**
-     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", inversedBy="departements", cascade={"all"})
      * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
      */
     private $region;

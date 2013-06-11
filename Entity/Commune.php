@@ -20,13 +20,13 @@ class Commune {
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement", inversedBy="communes", cascade={"all"})
      * @ORM\JoinColumn(name="departement_code", referencedColumnName="code")
      */
     protected $departement;
 
     /**
-     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", inversedBy="communes", cascade={"all"})
      * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
      */
     protected $region;

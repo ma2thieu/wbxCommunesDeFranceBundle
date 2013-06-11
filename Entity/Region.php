@@ -31,12 +31,18 @@ class Region {
      */
     protected $departements;
 
+    /**
+     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune", mappedBy="region", cascade={"all"})
+     */
+    protected $communes;
+
 
     /**
      *  Constructor
      */
     public function __construct() {
         $this->departements = new ArrayCollection();
+        $this->communes = new ArrayCollection();
     }
 
 
@@ -81,6 +87,27 @@ class Region {
             $departement->setRegion($this);
         }
         $this->departements = $departements;
+    }
+
+
+    public function addCommune(Commune $commune) {
+        $commune->setRegion($this);
+        $this->communes->add($commune);
+    }
+
+    public function removeCommune(Commune $commune) {
+        $this->communes->removeElement($commune);
+    }
+
+    public function getCommunes() {
+        return $this->communes;
+    }
+
+    public function setCommunes(Collection $communes) {
+        foreach ($communes as $commune) {
+            $commune->setRegion($this);
+        }
+        $this->communes = $communes;
     }
 
 
