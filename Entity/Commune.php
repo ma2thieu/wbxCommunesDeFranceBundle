@@ -3,62 +3,55 @@
 namespace wbx\CommunesDeFranceBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @Orm\MappedSuperclass
- * @UniqueEntity(fields = {"code", "departement", "region"}, message = "duplicate commune")
+ * @Orm\Entity()
+ * @UniqueEntity(fields = {"code"}, message = "duplicate commune")
  */
 class Commune {
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="string", length=8, unique=true)
      */
-    private $id;
+    private $code;
+
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $nom;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement", inversedBy="communes", cascade={"all"})
-     * @ORM\JoinColumn(name="departement_code", referencedColumnName="code")
+     * @ORM\JoinColumn(referencedColumnName="code")
      */
     protected $departement;
 
+    
     /**
      * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", inversedBy="communes", cascade={"all"})
-     * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
+     * @ORM\JoinColumn(referencedColumnName="code")
      */
     protected $region;
 
-    /**
-     * @ORM\Column(type="string", length=15)
-     */
-    protected $art_nom_maj;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="commune", cascade={"all"})
      */
-    protected $nom_maj;
-
-    /**
-     * @ORM\Column(type="string", length=15)
-     */
-    protected $art_nom_min;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $nom_min;
-
-
+    protected $localisations;
 
 
     /**
      *  Constructor
      */
     public function __construct() {
-        //
+        $this->localisations = new ArrayCollection();
     }
 
 
@@ -72,15 +65,6 @@ class Commune {
     }
 
 
-    public function getFullNomMin() {
-        return ($this->art_nom_min != "" ? $this->art_nom_min . " " : "") . $this->nom_min ;
-    }
-
-    public function getFullNomMaj() {
-        return ($this->art_nom_maj != "" ? $this->art_nom_maj . " " : "") . $this->nom_maj ;
-    }
-
-
     public function getCode() {
         return $this->code;
     }
@@ -88,6 +72,7 @@ class Commune {
     public function setCode($code) {
         $this->code = $code;
     }
+
 
 
     public function getDepartement() {
@@ -108,39 +93,42 @@ class Commune {
     }
 
 
-    public function getArtNomMaj() {
-        return $this->art_nom_maj;
+    public function getNom() {
+        return $this->nom;
     }
 
-    public function setArtNomMaj($art_nom_maj) {
-        $this->art_nom_maj = $art_nom_maj;
-    }
-
-
-    public function getNomMaj() {
-        return $this->nom_maj;
-    }
-
-    public function setNomMaj($nom_maj) {
-        $this->nom_maj = $nom_maj;
+    public function setNom($nom) {
+        $this->nom = $nom;
     }
 
 
-    public function getArtNomMin() {
-        return $this->art_nom_min;
+    public function getCodePostal() {
+        return $this->code_postal;
     }
 
-    public function setArtNomMin($art_nom_min) {
-        $this->art_nom_min = $art_nom_min;
+    public function setCodePostal($code_postal) {
+        $this->code_postal = $code_postal;
     }
 
 
-    public function getNomMin() {
-        return $this->nom_min;
+    public function addLocalisation(Localisation $localisation) {
+        $localisation->setCommune($this);
+        $this->localisations->add($localisation);
     }
 
-    public function setNomMin($nom_min) {
-        $this->nom_min = $nom_min;
+    public function removeLocalisation(Localisation $localisation) {
+        $this->localisations->removeElement($localisation);
+    }
+
+    public function getLocalisations() {
+        return $this->localisations;
+    }
+
+    public function setLocalisations(Collection $localisations) {
+        foreach ($localisations as $localisation) {
+            $localisation->setCommune($this);
+        }
+        $this->localisations = $localisations;
     }
 
 }

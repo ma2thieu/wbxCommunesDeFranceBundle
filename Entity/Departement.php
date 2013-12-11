@@ -16,26 +16,35 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Departement {
 
     /**
-     * @ORM\Column(name="code", type="string", length=3, unique=true)
      * @ORM\Id
+     * @ORM\Column(type="string", length=8, unique=true)
      */
     private $code;
 
+    
     /**
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
+    
     /**
      * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", inversedBy="departements", cascade={"all"})
-     * @ORM\JoinColumn(name="region_code", referencedColumnName="code")
+     * @ORM\JoinColumn(referencedColumnName="code")
      */
     private $region;
+
 
     /**
      * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune", mappedBy="departement", cascade={"all"})
      */
     protected $communes;
+    
+
+    /**
+     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="departement", cascade={"all"})
+     */
+    protected $localisations;
 
 
     /**
@@ -43,6 +52,7 @@ class Departement {
      */
     public function __construct() {
         $this->commmunes = new ArrayCollection();
+        $this->localisations = new ArrayCollection();
     }
 
 
@@ -96,6 +106,27 @@ class Departement {
             $commmune->setDepartement($this);
         }
         $this->commmunes = $commmunes;
+    }
+
+
+    public function addLocalisation(Localisation $localisation) {
+        $localisation->setDepartement($this);
+        $this->localisations->add($localisation);
+    }
+
+    public function removeLocalisation(Localisation $localisation) {
+        $this->localisations->removeElement($localisation);
+    }
+
+    public function getLocalisations() {
+        return $this->localisations;
+    }
+
+    public function setLocalisations(Collection $localisations) {
+        foreach ($localisations as $localisation) {
+            $localisation->setDepartement($this);
+        }
+        $this->localisations = $localisations;
     }
 
 }

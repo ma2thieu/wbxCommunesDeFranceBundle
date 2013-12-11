@@ -16,25 +16,35 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Region {
 
     /**
-     * @ORM\Column(name="code", type="string", length=2, unique=true)
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(type="string", length=8, unique=true)
      */
     private $code;
 
+    
     /**
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
+    
     /**
      * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement", mappedBy="region", cascade={"all"})
      */
     protected $departements;
 
+    
     /**
      * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune", mappedBy="region", cascade={"all"})
      */
     protected $communes;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="localisations", cascade={"all"})
+     */
+    protected $localisations;
 
 
     /**
@@ -43,6 +53,7 @@ class Region {
     public function __construct() {
         $this->departements = new ArrayCollection();
         $this->communes = new ArrayCollection();
+        $this->localisations = new ArrayCollection();
     }
 
 
@@ -108,6 +119,27 @@ class Region {
             $commune->setRegion($this);
         }
         $this->communes = $communes;
+    }
+
+
+    public function addLocalisation(Localisation $localisation) {
+        $localisation->setRegion($this);
+        $this->localisations->add($localisation);
+    }
+
+    public function removeLocalisation(Localisation $localisation) {
+        $this->localisations->removeElement($localisation);
+    }
+
+    public function getLocalisations() {
+        return $this->localisations;
+    }
+
+    public function setLocalisations(Collection $localisations) {
+        foreach ($localisations as $localisation) {
+            $localisation->setRegion($this);
+        }
+        $this->localisations = $localisations;
     }
 
 
