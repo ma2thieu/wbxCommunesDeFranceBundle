@@ -56,7 +56,7 @@ class Commune {
 
 
     public function __toString() {
-        return $this->getNomMin();
+        return $this->getNom();
     }
 
 
