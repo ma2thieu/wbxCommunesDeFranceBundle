@@ -42,7 +42,7 @@ class Region {
 
 
     /**
-     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="localisations", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="region", cascade={"all"})
      */
     protected $localisations;
 
