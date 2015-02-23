@@ -22,16 +22,10 @@ class CodePostal {
 
 
     /**
-     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="code_postal", cascade={"all"})
-     */
-    protected $localisations;
-
-
-    /**
      *  Constructor
      */
     public function __construct() {
-        $this->localisations = new ArrayCollection();
+        //
     }
 
 
@@ -42,27 +36,6 @@ class CodePostal {
 
     public function getCode() {
         return $this->code;
-    }
-
-
-    public function addLocalisation(Localisation $localisation) {
-        $localisation->setCodePostal($this);
-        $this->localisations->add($localisation);
-    }
-
-    public function removeLocalisation(Localisation $localisation) {
-        $this->localisations->removeElement($localisation);
-    }
-
-    public function getLocalisations() {
-        return $this->localisations;
-    }
-
-    public function setLocalisations(Collection $localisations) {
-        foreach ($localisations as $localisation) {
-            $localisation->setCodePostal($this);
-        }
-        $this->localisations = $localisations;
     }
 
 

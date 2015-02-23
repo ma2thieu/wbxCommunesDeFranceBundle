@@ -39,12 +39,6 @@ class Departement {
      * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune", mappedBy="departement", cascade={"all"})
      */
     protected $communes;
-    
-
-    /**
-     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="departement", cascade={"all"})
-     */
-    protected $localisations;
 
 
     /**
@@ -52,7 +46,6 @@ class Departement {
      */
     public function __construct() {
         $this->commmunes = new ArrayCollection();
-        $this->localisations = new ArrayCollection();
     }
 
 
@@ -106,27 +99,6 @@ class Departement {
             $commmune->setDepartement($this);
         }
         $this->commmunes = $commmunes;
-    }
-
-
-    public function addLocalisation(Localisation $localisation) {
-        $localisation->setDepartement($this);
-        $this->localisations->add($localisation);
-    }
-
-    public function removeLocalisation(Localisation $localisation) {
-        $this->localisations->removeElement($localisation);
-    }
-
-    public function getLocalisations() {
-        return $this->localisations;
-    }
-
-    public function setLocalisations(Collection $localisations) {
-        foreach ($localisations as $localisation) {
-            $localisation->setDepartement($this);
-        }
-        $this->localisations = $localisations;
     }
 
 }

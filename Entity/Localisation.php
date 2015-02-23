@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class Localisation {
 
-	/**
+    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -20,28 +20,28 @@ class Localisation {
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\CodePostal", inversedBy="localisations", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\CodePostal")
      * @ORM\JoinColumn(referencedColumnName="code")
      */
     protected $code_postal;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune", inversedBy="localisations", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Commune")
      * @ORM\JoinColumn(referencedColumnName="code")
      */
     protected $commune;
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement", inversedBy="localisations", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Departement")
      * @ORM\JoinColumn(referencedColumnName="code")
      */
     protected $departement;
 
     
     /**
-     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region", inversedBy="localisations", cascade={"all"})
+     * @ORM\ManyToOne(targetEntity="wbx\CommunesDeFranceBundle\Entity\Region")
      * @ORM\JoinColumn(referencedColumnName="code")
      */
     protected $region;
@@ -61,7 +61,7 @@ class Localisation {
 
 
     public function getId() {
-    	return $this->id;
+        return $this->id;
     }
 
 

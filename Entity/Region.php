@@ -42,18 +42,11 @@ class Region {
 
 
     /**
-     * @ORM\OneToMany(targetEntity="wbx\CommunesDeFranceBundle\Entity\Localisation", mappedBy="region", cascade={"all"})
-     */
-    protected $localisations;
-
-
-    /**
      *  Constructor
      */
     public function __construct() {
         $this->departements = new ArrayCollection();
         $this->communes = new ArrayCollection();
-        $this->localisations = new ArrayCollection();
     }
 
 
@@ -120,27 +113,5 @@ class Region {
         }
         $this->communes = $communes;
     }
-
-
-    public function addLocalisation(Localisation $localisation) {
-        $localisation->setRegion($this);
-        $this->localisations->add($localisation);
-    }
-
-    public function removeLocalisation(Localisation $localisation) {
-        $this->localisations->removeElement($localisation);
-    }
-
-    public function getLocalisations() {
-        return $this->localisations;
-    }
-
-    public function setLocalisations(Collection $localisations) {
-        foreach ($localisations as $localisation) {
-            $localisation->setRegion($this);
-        }
-        $this->localisations = $localisations;
-    }
-
 
 }
