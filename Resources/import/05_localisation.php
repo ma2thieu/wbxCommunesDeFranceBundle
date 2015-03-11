@@ -41,3 +41,8 @@ fclose($fh);
 echo "\nDONE : $i\n";
 
 
+// + insert Region and Departements on their own :
+// select region_id from Localisation group by region_id;
+// select region_id, departement_id from Localisation group by departement_id;
+
+

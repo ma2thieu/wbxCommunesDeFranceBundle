@@ -60,6 +60,23 @@ class Localisation {
     }
 
 
+    public function getFullname() {
+        $str = "";
+
+        if ($this->commune !== null) {
+            $str = $this->getCodePostalNom() . " " . $this->getCommuneNom();
+        }
+        else if ($this->departement !== null) {
+            $str = $this->getDepartementNom()  . " (département)";
+        }
+        else if ($this->region !== null) {
+            $str = $this->getRegionNom()  . " (région)";
+        }
+
+        return $str;
+    }
+
+
     public function getId() {
         return $this->id;
     }
