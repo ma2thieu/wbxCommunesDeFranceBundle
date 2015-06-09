@@ -14,3 +14,5 @@ app/config/parameters.yml
 
 .DS_Store
 .idea
+.sublime-project
+.sublime-workspace

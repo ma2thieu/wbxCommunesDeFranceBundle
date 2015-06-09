@@ -64,13 +64,13 @@ class Localisation {
         $str = "";
 
         if ($this->commune !== null) {
-            $str = $this->getCodePostalNom() . " " . $this->getCommuneNom();
+            $str = $this->getCodePostalStr() . " " . $this->getCommuneStr();
         }
         else if ($this->departement !== null) {
-            $str = $this->getDepartementNom()  . " (département)";
+            $str = $this->getDepartementStr()  . " (" . $this->getDepartementCodeStr() . ")";
         }
         else if ($this->region !== null) {
-            $str = $this->getRegionNom()  . " (région)";
+            $str = strtoupper($this->getRegionStr());
         }
 
         return $str;
@@ -118,19 +118,23 @@ class Localisation {
     }
 
 
-    public function getCodePostalNom() {
+    public function getCodePostalStr() {
         return $this->getCodePostal() ? $this->getCodePostal()->getCode() : "";
     }
 
-    public function getCommuneNom() {
+    public function getCommuneStr() {
         return $this->getCommune() ? $this->getCommune()->getNom() : "";
     }
 
-    public function getDepartementNom() {
+    public function getDepartementStr() {
         return $this->getDepartement() ? $this->getDepartement()->getNom() : "";
     }
 
-    public function getRegionNom() {
+    public function getDepartementCodeStr() {
+        return $this->getDepartement() ? $this->getDepartement()->getCode() : "";
+    }
+
+    public function getRegionStr() {
         return $this->getRegion() ? $this->getRegion()->getNom() : "";
     }
 
